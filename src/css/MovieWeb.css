@@ -1,0 +1,39 @@
+@charset "utf-8";
+
+.clearfix:after {
+  display: block;
+  content: '';
+  clear: both;
+}
+body {
+  background: #141620;
+  font-family: 'Noto Sans KR', sans-serif;
+  letter-spacing: -0.069em;
+  font-weight: 400;
+}
+#header {
+  display: flex;
+  height: 200px;
+  background: transparent;
+  align-items: center;
+  justify-content: flex-end;
+}
+#header ul {
+  margin: 0;
+  list-style: none;
+  display: flex;
+  padding: 0 20px;
+}
+#header ul li {
+  margin: 0 1em;
+}
+#header ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 500;
+}
+#header ul li.on a {
+  text-decoration: underline;
+  font-weight: 700;
+}

@@ -1,10 +1,13 @@
 import React from 'react';
-import TestContainer from './containers/TestContainer';
+import MovieWeb from './containers/MovieWeb';
 import './App.css';
 
 const App = () => {
-
-  return <div className="App"><TestContainer /></div>;
+  return (
+    <div className="App">
+      <MovieWeb />
+    </div>
+  );
 };
 
 export default App;
