@@ -1,22 +1,47 @@
-import React from 'react';
-// import { Tab, Tabs, TabList } from 'react-tabs';
+import React, { useState } from 'react';
+import { MenuList } from '../containers/HeaderContainer';
 
-type HeaderProps = {};
+type HeaderProps = {
+  menuList: MenuList[];
+};
 
-function Header() {
+function Header({ menuList }: HeaderProps) {
+  const [menu, setMenu] = useState(menuList);
+  const toggleMenu = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
+    const id = e.currentTarget.dataset.id;
+    const updated: MenuList[] = menu.map(list => {
+      if (list.id === id) {
+        return {
+          ...list,
+          isOn: true
+        };
+      } else {
+        return {
+          ...list,
+          isOn: false
+        };
+      }
+    });
+    setMenu(updated);
+  };
+
   return (
     <header id="header">
       <div className="nav_wrap">
         <nav className="clearfix">
-          {/* <Tabs>
-            <TabList>
-              <Tab>현재 상영중</Tab>
-              <Tab>인기순</Tab>
-              <Tab>평점순</Tab>
-              <Tab>개봉순</Tab>
-              <Tab>개봉예정</Tab>
-            </TabList>
-          </Tabs> */}
+          <ul>
+            {menu &&
+              menu.map(list => (
+                <li
+                  key={list.id}
+                  data-id={list.id}
+                  className={list.isOn ? 'on' : undefined}
+                  onClick={toggleMenu}
+                >
+                  {list.label}
+                </li>
+              ))}
+          </ul>
         </nav>
       </div>
     </header>

@@ -26,14 +26,13 @@ body {
 }
 #header ul li {
   margin: 0 1em;
-}
-#header ul li a {
   color: #fff;
   text-decoration: none;
   font-size: 20px;
   font-weight: 500;
+  cursor: pointer;
 }
-#header ul li.on a {
+#header ul li.on {
   text-decoration: underline;
   font-weight: 700;
 }
