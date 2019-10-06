@@ -12,11 +12,15 @@ body {
   font-weight: 400;
 }
 #header {
+  background: transparent;
+}
+#header .header_inner {
   display: flex;
   height: 200px;
-  background: transparent;
   align-items: center;
   justify-content: flex-end;
+  width: 1200px;
+  margin: 0 auto;
 }
 #header ul {
   margin: 0;

@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../modules';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { getMovieListThunk } from '../modules/tmdb';
-import { Movie } from '../api/tmdb';
 import Header from '../components/Header';
 
 export type MenuList = {
@@ -40,7 +38,13 @@ const menuList: MenuList[] = [
 ];
 
 function HeaderContainer() {
-  return <Header menuList={menuList} />;
+  const dispatch = useDispatch();
+
+  const loadMovieList = (id: string) => {
+    dispatch(getMovieListThunk(id));
+  };
+
+  return <Header menuList={menuList} loadMovieList={loadMovieList} />;
 }
 
 export default HeaderContainer;
