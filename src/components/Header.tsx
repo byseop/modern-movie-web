@@ -27,6 +27,10 @@ function Header({ menuList, loadMovieList }: HeaderProps) {
     loadMovieList(id);
   };
 
+  useEffect(() => {
+    loadMovieList('now_playing');
+  }, [loadMovieList])
+
   return (
     <header id="header">
       <div className="header_inner">

@@ -13,7 +13,7 @@ const menuList: MenuList[] = [
   {
     id: 'now_playing',
     label: '현재 상영중',
-    isOn: false
+    isOn: true
   },
   {
     id: 'popular',
