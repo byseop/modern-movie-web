@@ -10,9 +10,14 @@ body {
   font-family: 'Noto Sans KR', sans-serif;
   letter-spacing: -0.069em;
   font-weight: 400;
+  position: relative;
 }
 #header {
   background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 #header .header_inner {
   display: flex;
@@ -34,8 +39,10 @@ body {
   text-decoration: none;
   font-size: 20px;
   cursor: pointer;
+  opacity: 0.5;
 }
 #header ul li.on {
   text-decoration: underline;
   font-weight: 500;
+  opacity: 1;
 }
