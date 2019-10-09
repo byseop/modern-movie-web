@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import MainVisual from '../components/MainVisual';
 import { useDispatch } from 'react-redux';
 import { getTrendListThunk } from '../modules/trend';
-
+import '../css/MainVisual.css';
 
 function MainVisualContainer() {
   const dispatch = useDispatch();
