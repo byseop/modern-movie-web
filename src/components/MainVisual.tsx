@@ -85,4 +85,4 @@ function MainVisual({ genres }: MainVisualProps) {
   return null;
 }
 
-export default MainVisual;
+export default React.memo(MainVisual);

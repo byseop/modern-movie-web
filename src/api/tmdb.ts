@@ -38,7 +38,7 @@ export type MovieList = {
 
 export async function getTrendMedia(mediaType: string, timeWindow: string) {
   const response = await axios.get<MovieList>(
-    `https://api.themoviedb.org/3/trending/${mediaType}/${timeWindow}?api_key=${API_KEY}&language=ko-KR`
+    `${TMDB_URL}/trending/${mediaType}/${timeWindow}?api_key=${API_KEY}&language=ko-KR`
   );
 
   return response.data;
@@ -46,4 +46,23 @@ export async function getTrendMedia(mediaType: string, timeWindow: string) {
 
 export interface Media extends Movie {
   media_type: string;
+}
+
+export interface Video {
+  id: string;
+  iso_639_1: string;
+  iso_3166_1: string;
+  key: string;
+  name: string;
+  site: string;
+  size: number;
+  type: string;
+}
+
+export async function getVideo(mediaType: string, id: number) {
+  const response = await axios.get<Video>(
+    `${TMDB_URL}/${mediaType}/${id}/videos?api_key=${API_KEY}/language=ko-KR`
+  );
+
+  return response.data;
 }
