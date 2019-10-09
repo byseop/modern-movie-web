@@ -59,3 +59,44 @@
   font-size: 24px;
   letter-spacing: 0;
 }
+.media_list .media_score {
+  color: #d8d8d8;
+  font-size: 20px;
+  margin-top: 1em;
+  letter-spacing: 0;
+}
+.media_list .media_score span.vote_average {
+  margin: 0 0.5em;
+}
+.media_genre {
+  display: flex;
+  margin-top: 20px;
+}
+.media_genre .genre {
+  margin-right: 1em;
+  border: 1px solid #d8d8d8;
+  border-radius: 10px;
+  padding: 0.5em;
+  line-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.media_genre p {
+  margin: 0;
+  color: #d8d8d8;
+}
+.media_overview {
+  margin-top: 20px;
+  color: #d8d8d8;
+}
+.media_overview p {
+  margin: 0;
+  line-height: 1.7em;
+  height: 10.2em;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+}

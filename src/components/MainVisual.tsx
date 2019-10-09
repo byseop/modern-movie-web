@@ -1,10 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../modules';
 import { Media, POSTER_URL_500 } from '../api/tmdb';
+import { Genre } from '../api/genres';
 import Swiper from 'swiper';
 
-function MainVisual() {
+type MainVisualProps = {
+  genres: Genre[];
+};
+
+function MainVisual({ genres }: MainVisualProps) {
   const { data, loading, error } = useSelector(
     (state: RootState) => state.trend.trendList
   );
@@ -23,6 +28,17 @@ function MainVisual() {
       }
     });
   });
+
+  const renderGenre = useCallback(
+    (genreId: number) => {
+      return (
+        <div className="genre">
+          <p>{genres.filter(genre => genre.id === genreId)[0].name}</p>
+        </div>
+      );
+    },
+    [genres]
+  );
 
   if (loading) return <p className="message">로딩중</p>;
   if (error) return <p className="message">에러발생</p>;
@@ -45,6 +61,17 @@ function MainVisual() {
                     <div className="media_title">
                       <h3>{media.title}</h3>
                       <h4>{media.original_title}</h4>
+                    </div>
+                    <div className="media_score">
+                      <i className="fas fa-star"></i>
+                      <span className="vote_average">{media.vote_average}</span>
+                      <span className="vote_count">({media.vote_count})</span>
+                    </div>
+                    <div className="media_genre">
+                      {media.genre_ids.map(genre_id => renderGenre(genre_id))}
+                    </div>
+                    <div className="media_overview">
+                      <p>{media.overview}</p>
                     </div>
                   </div>
                 </div>
