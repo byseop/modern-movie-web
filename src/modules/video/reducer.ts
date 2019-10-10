@@ -4,10 +4,10 @@ import { asyncState } from '../../lib/reducerUtils';
 import { GET_VIDEO, GET_VIDEO_SUCCESS, GET_VIDEO_ERROR } from './actions';
 
 const initialState: VideoState = {
-  trendList: asyncState.initial()
+  video: asyncState.initial()
 };
 
-const trend = createReducer<VideoState, VideoAction>(initialState, {
+const video = createReducer<VideoState, VideoAction>(initialState, {
   [GET_VIDEO]: state => ({
     ...state,
     trendList: asyncState.load()
@@ -22,4 +22,4 @@ const trend = createReducer<VideoState, VideoAction>(initialState, {
   })
 });
 
-export default trend;
+export default video;

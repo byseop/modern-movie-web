@@ -5,13 +5,12 @@ const TMDB_URL = 'https://api.themoviedb.org/3';
 export const POSTER_URL_342 = 'https://image.tmdb.org/t/p/w342';
 export const POSTER_URL_500 = 'https://image.tmdb.org/t/p/w500';
 export const POSTER_URL_780 = 'https://image.tmdb.org/t/p/w780';
-export const POSTER_URL_ORIGINAL = 'https://image.tmdb.org/t/p/orignal';
+export const POSTER_URL_ORIGINAL = 'https://image.tmdb.org/t/p/original';
 
 export async function getMovie(param: string) {
   const response = await axios.get<MovieList>(
     `${TMDB_URL}/movie/${param}?api_key=${API_KEY}&language=ko-KR&page=1`
   );
-
   return response.data;
 }
 
@@ -40,7 +39,6 @@ export async function getTrendMedia(mediaType: string, timeWindow: string) {
   const response = await axios.get<MovieList>(
     `${TMDB_URL}/trending/${mediaType}/${timeWindow}?api_key=${API_KEY}&language=ko-KR`
   );
-
   return response.data;
 }
 
@@ -58,11 +56,14 @@ export interface Video {
   size: number;
   type: string;
 }
+export interface VideoList {
+  id: number,
+  results: Video[]
+}
 
 export async function getVideo(mediaType: string, id: number) {
-  const response = await axios.get<Video>(
-    `${TMDB_URL}/${mediaType}/${id}/videos?api_key=${API_KEY}/language=ko-KR`
+  const response = await axios.get<VideoList>(
+    `${TMDB_URL}/${mediaType}/${id}/videos?api_key=${API_KEY}&language=ko-KR`
   );
-
   return response.data;
 }

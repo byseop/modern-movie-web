@@ -5,5 +5,5 @@ import { AsyncState } from '../../lib/reducerUtils';
 
 export type VideoAction = ActionType<typeof actions>;
 export type VideoState = {
-  trendList: AsyncState<Video, Error>;
+  video: AsyncState<Video, Error>;
 };
