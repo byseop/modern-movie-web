@@ -2,6 +2,7 @@ import React from 'react';
 import HeaderContainer from './HeaderContainer';
 import '../css/MovieWeb.css';
 import MainVisualContainer from './MainVisualContainer';
+import ListContainer from './ListContainer';
 
 function MovieWeb() {
   return (
@@ -12,6 +13,9 @@ function MovieWeb() {
         </div>
       </header>
       <MainVisualContainer />
+      <section className="list_section">
+        <ListContainer />
+      </section>
     </>
   );
 }

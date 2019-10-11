@@ -151,7 +151,7 @@ const MainVisualList = React.memo(
           </div>
           <div className="media_score">
             <i className="fas fa-star"></i>
-            <span className="vote_average">{vote_average}</span>
+            <span className="vote_average">{vote_average*10}%</span>
             <span className="vote_count">({vote_count})</span>
           </div>
           <div className="media_genre">

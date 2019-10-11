@@ -37,9 +37,9 @@ export type MovieList = {
   results: [];
 };
 
-export async function getTrendMedia(mediaType: string, timeWindow: string) {
+export async function getTrendMedia(mediaType: string) {
   const response = await axios.get<MovieList>(
-    `${TMDB_URL}/trending/${mediaType}/${timeWindow}?api_key=${API_KEY}&language=ko-KR`
+    `${TMDB_URL}/trending/${mediaType}/week?api_key=${API_KEY}&language=ko-KR`
   );
   return response.data;
 }

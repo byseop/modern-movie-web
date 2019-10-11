@@ -9,57 +9,32 @@ export type MenuList = {
   isOn: boolean;
 };
 
-// const menuList: MenuList[] = [
-//   {
-//     id: 'now_playing',
-//     label: '현재 상영중',
-//     isOn: true
-//   },
-//   {
-//     id: 'popular',
-//     label: '인기순',
-//     isOn: false
-//   },
-//   {
-//     id: 'top_rated',
-//     label: '평점순',
-//     isOn: false
-//   },
-//   {
-//     id: 'latest',
-//     label: '개봉순',
-//     isOn: false
-//   },
-//   {
-//     id: 'upcoming',
-//     label: '개봉예정',
-//     isOn: false
-//   }
-// ];
 const menuList: MenuList[] = [
   {
     id: 'movie',
-    label: '영화',
+    label: '영화 트렌드',
     isOn: true
   },
   {
     id: 'tv',
-    label: 'TV',
+    label: 'TV 트렌드',
     isOn: false
   }
 ];
 
 function HeaderContainer() {
   const dispatch = useDispatch();
-
-  // const loadMovieList = (id: string) => {
-  //   dispatch(getMovieListThunk(id));
-  // };
   const loadTrendMediaList = (id: string) => {
-    dispatch(getTrendListThunk(id, 'week'))
+    dispatch(getTrendListThunk(id))
   }
+  const initialParam = 'movie'
 
-  return <Header menuList={menuList} loadTrendMediaList={loadTrendMediaList} />;
+  return (
+    <>
+      <h2 className="head_title">이번 주 트렌드</h2>
+      <Header menuList={menuList} load={loadTrendMediaList} initialParam={initialParam} />
+    </>
+  );
 }
 
 export default HeaderContainer;

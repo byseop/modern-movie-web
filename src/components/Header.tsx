@@ -3,10 +3,11 @@ import { MenuList } from '../containers/HeaderContainer';
 
 type HeaderProps = {
   menuList: MenuList[];
-  loadTrendMediaList: any;
+  load: any;
+  initialParam: string;
 };
 
-function Header({ menuList, loadTrendMediaList }: HeaderProps) {
+function Header({ menuList, load, initialParam }: HeaderProps) {
   const [menu, setMenu] = useState(menuList);
   const toggleMenu = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
     const id = e.currentTarget.dataset.id;
@@ -24,12 +25,12 @@ function Header({ menuList, loadTrendMediaList }: HeaderProps) {
       }
     });
     setMenu(updated);
-    loadTrendMediaList(id, 'week');
+    load(id);
   };
 
   useEffect(() => {
-    loadTrendMediaList('movie', 'week');
-  }, [loadTrendMediaList]);
+    load(initialParam);
+  }, [load, initialParam]);
 
   return (
     <div className="nav_wrap">
