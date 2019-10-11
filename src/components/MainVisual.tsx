@@ -1,27 +1,31 @@
 import React, { useEffect, useCallback, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../modules';
 import {
   Media,
   POSTER_URL_500,
   POSTER_URL_ORIGINAL,
   getVideo
 } from '../api/tmdb';
-import { Genre } from '../api/genres';
+import { getGenre } from '../api/genres';
 import Swiper from 'swiper';
 
 /**
  *  메인비주얼 컴포넌트
  */
-type MainVisualProps = {
-  genres: Genre[];
-};
 
-function MainVisual({ genres }: MainVisualProps) {
-  const { data, loading, error } = useSelector(
-    (state: RootState) => state.trend.trendList
-  );
+const setBackground = () => {
+  setTimeout(() => {
+    document
+      .querySelectorAll('.bg')[0]
+      .setAttribute(
+        'style',
+        `background-image: url(${POSTER_URL_ORIGINAL}${document
+          .querySelectorAll('.swiper-slide-active')[0]
+          .getAttribute('data-backdrop')});`
+      );
+  }, 10);
+}
 
+function MainVisual({ data }: { data: Media[] }) {
   useEffect(() => {
     new Swiper('.main_visual_slider', {
       observer: true,
@@ -36,16 +40,11 @@ function MainVisual({ genres }: MainVisualProps) {
       },
       slideToClickedSlide: true,
       on: {
+        init: () => {
+          setBackground();
+        },
         slideChange: () => {
-          const backdrop = document
-            .querySelectorAll('.swiper-slide-active')[0]
-            .getAttribute('data-backdrop');
-          document
-            .querySelectorAll('.bg')[0]
-            .setAttribute(
-              'style',
-              `background-image: url(${POSTER_URL_ORIGINAL}${backdrop});`
-            );
+          setBackground();
         }
       }
     });
@@ -53,39 +52,37 @@ function MainVisual({ genres }: MainVisualProps) {
 
   const renderGenre = useCallback(
     (genreId: number) => {
+      const genres = getGenre(data[0].media_type);
       const genre = genres.filter(g => g.id === genreId);
-      return (
-        <div className="genre" key={genre[0].id}>
-          <p>{genre[0].name}</p>
-        </div>
-      );
+      if (genre.length > 0) {
+        return (
+          <div className="genre" key={genre[0].id}>
+            <p>{genre[0].name}</p>
+          </div>
+        );
+      }
+      return null;
     },
-    [genres]
+    [data]
   );
-
-  if (loading) return <p className="message">로딩중</p>;
-  if (error) return <p className="message">에러발생</p>;
-  if (data) {
-    return (
-      <div className="main_visual">
-        <div className="bg"></div>
-        <div className="main_visual_inner">
-          <div className="swiper-container main_visual_slider">
-            <div className="swiper-wrapper">
-              {data.results.map((media: Media) => (
-                <MainVisualList
-                  key={media.id}
-                  media={media}
-                  renderGenre={renderGenre}
-                />
-              ))}
-            </div>
+  return (
+    <div className="main_visual">
+      <div className="bg"></div>
+      <div className="main_visual_inner">
+        <div className="swiper-container main_visual_slider">
+          <div className="swiper-wrapper">
+            {data.map((media: Media) => (
+              <MainVisualList
+                key={media.id}
+                media={media}
+                renderGenre={renderGenre}
+              />
+            ))}
           </div>
         </div>
       </div>
-    );
-  }
-  return null;
+    </div>
+  );
 }
 
 /**
@@ -108,22 +105,35 @@ const MainVisualList = React.memo(
       genre_ids,
       overview,
       media_type,
-      backdrop_path
+      backdrop_path,
+      name,
+      original_name
     } = media;
 
-    const [video, setVideo] = useState('');
-    const renderVideo = useCallback((mediaType: string, id: number) => {
-      getVideo(mediaType, id).then(value => {
-        const data = value.results.filter(list => list.type === 'Trailer');
-        if (data[0]) {
-          return setVideo(data[0].key);
-        }
-        return null;
-      });
-    }, []);
-    useEffect(() => {
-      renderVideo(media_type, id);
-    });
+    const renderTitle = useCallback(() => {
+      switch (media_type) {
+        case 'movie':
+          return title;
+        case 'tv':
+          return name;
+        default:
+          throw new Error(
+            `[title error] -> Unhandled media type "${media_type}"`
+          );
+      }
+    }, [media_type, name, title]);
+    const renderOriTitle = useCallback(() => {
+      switch (media_type) {
+        case 'movie':
+          return original_title;
+        case 'tv':
+          return original_name;
+        default:
+          throw new Error(
+            `[original_title error] -> Unhandled media type "${media_type}"`
+          );
+      }
+    }, [media_type, original_name, original_title]);
 
     return (
       <div
@@ -136,8 +146,8 @@ const MainVisualList = React.memo(
         </div>
         <div className="media_info">
           <div className="media_title">
-            <h3>{title}</h3>
-            <h4>{original_title}</h4>
+            <h3>{renderTitle()}</h3>
+            <h4>{renderOriTitle()}</h4>
           </div>
           <div className="media_score">
             <i className="fas fa-star"></i>
@@ -150,21 +160,45 @@ const MainVisualList = React.memo(
           <div className="media_overview">
             <p>{overview}</p>
           </div>
-          {video ? (
-            <div className="media_trailer">
-              <a
-                href={`https://www.youtube.com/watch?v=${video}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i className="fab fa-youtube"></i> 예고편 감상하기
-              </a>
-            </div>
-          ) : null}
+          <Video mediaType={media_type} id={id} />
         </div>
       </div>
     );
   }
 );
+
+function Video({ mediaType, id }: { mediaType: string; id: number }) {
+  const [link, setLink] = useState('');
+  const renderVideo = useCallback(async () => {
+    const data = await getVideo(mediaType, id);
+    try {
+      const arr = data.results.filter(list => list.type === 'Trailer');
+      if (arr[0]) {
+        return setLink(arr[0].key);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }, [mediaType, id]);
+
+  useEffect(() => {
+    renderVideo();
+  }, [renderVideo]);
+
+  if (link) {
+    return (
+      <div className="media_trailer">
+        <a
+          href={`https://www.youtube.com/watch?v=${link}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i className="fab fa-youtube"></i> 예고편
+        </a>
+      </div>
+    );
+  }
+  return null;
+}
 
 export default MainVisual;

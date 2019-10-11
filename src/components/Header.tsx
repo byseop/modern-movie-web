@@ -3,10 +3,10 @@ import { MenuList } from '../containers/HeaderContainer';
 
 type HeaderProps = {
   menuList: MenuList[];
-  loadMovieList: any;
+  loadTrendMediaList: any;
 };
 
-function Header({ menuList, loadMovieList }: HeaderProps) {
+function Header({ menuList, loadTrendMediaList }: HeaderProps) {
   const [menu, setMenu] = useState(menuList);
   const toggleMenu = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {
     const id = e.currentTarget.dataset.id;
@@ -24,35 +24,31 @@ function Header({ menuList, loadMovieList }: HeaderProps) {
       }
     });
     setMenu(updated);
-    loadMovieList(id);
+    loadTrendMediaList(id, 'week');
   };
 
   useEffect(() => {
-    loadMovieList('now_playing');
-  }, [loadMovieList])
+    loadTrendMediaList('movie', 'week');
+  }, [loadTrendMediaList]);
 
   return (
-    <header id="header">
-      <div className="header_inner">
-        <div className="nav_wrap">
-          <nav className="clearfix">
-            <ul>
-              {menu &&
-                menu.map(list => (
-                  <li
-                    key={list.id}
-                    data-id={list.id}
-                    className={list.isOn ? 'on' : undefined}
-                    onClick={toggleMenu}
-                  >
-                    {list.label}
-                  </li>
-                ))}
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </header>
+    <div className="nav_wrap">
+      <nav className="clearfix">
+        <ul>
+          {menu &&
+            menu.map(list => (
+              <li
+                key={list.id}
+                data-id={list.id}
+                className={list.isOn ? 'on' : undefined}
+                onClick={toggleMenu}
+              >
+                {list.label}
+              </li>
+            ))}
+        </ul>
+      </nav>
+    </div>
   );
 }
 

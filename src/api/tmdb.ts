@@ -29,6 +29,8 @@ export interface Movie {
   vote_count: number;
   video: boolean;
   vote_average: number;
+  name: string;
+  original_name: string;
 }
 
 export type MovieList = {
@@ -57,8 +59,8 @@ export interface Video {
   type: string;
 }
 export interface VideoList {
-  id: number,
-  results: Video[]
+  id: number;
+  results: Video[];
 }
 
 export async function getVideo(mediaType: string, id: number) {

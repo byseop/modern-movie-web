@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { getMovieListThunk } from '../modules/tmdb';
 import Header from '../components/Header';
+import { getTrendListThunk } from '../modules/trend';
 
 export type MenuList = {
   id: string;
@@ -9,30 +9,42 @@ export type MenuList = {
   isOn: boolean;
 };
 
+// const menuList: MenuList[] = [
+//   {
+//     id: 'now_playing',
+//     label: '현재 상영중',
+//     isOn: true
+//   },
+//   {
+//     id: 'popular',
+//     label: '인기순',
+//     isOn: false
+//   },
+//   {
+//     id: 'top_rated',
+//     label: '평점순',
+//     isOn: false
+//   },
+//   {
+//     id: 'latest',
+//     label: '개봉순',
+//     isOn: false
+//   },
+//   {
+//     id: 'upcoming',
+//     label: '개봉예정',
+//     isOn: false
+//   }
+// ];
 const menuList: MenuList[] = [
   {
-    id: 'now_playing',
-    label: '현재 상영중',
+    id: 'movie',
+    label: '영화',
     isOn: true
   },
   {
-    id: 'popular',
-    label: '인기순',
-    isOn: false
-  },
-  {
-    id: 'top_rated',
-    label: '평점순',
-    isOn: false
-  },
-  {
-    id: 'latest',
-    label: '개봉순',
-    isOn: false
-  },
-  {
-    id: 'upcoming',
-    label: '개봉예정',
+    id: 'tv',
+    label: 'TV',
     isOn: false
   }
 ];
@@ -40,11 +52,14 @@ const menuList: MenuList[] = [
 function HeaderContainer() {
   const dispatch = useDispatch();
 
-  const loadMovieList = (id: string) => {
-    dispatch(getMovieListThunk(id));
-  };
+  // const loadMovieList = (id: string) => {
+  //   dispatch(getMovieListThunk(id));
+  // };
+  const loadTrendMediaList = (id: string) => {
+    dispatch(getTrendListThunk(id, 'week'))
+  }
 
-  return <Header menuList={menuList} loadMovieList={loadMovieList} />;
+  return <Header menuList={menuList} loadTrendMediaList={loadTrendMediaList} />;
 }
 
 export default HeaderContainer;

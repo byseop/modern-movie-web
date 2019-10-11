@@ -20,6 +20,7 @@
   background-repeat: no-repeat;
   background-position: center center;
   opacity: 0.4;
+  transition: all 0.5s ease-out;
 }
 .main_visual .bg:after {
   position: absolute;

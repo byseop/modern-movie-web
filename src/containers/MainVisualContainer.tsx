@@ -1,18 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import MainVisual from '../components/MainVisual';
-import { useDispatch } from 'react-redux';
-import { getTrendListThunk } from '../modules/trend';
-import { getGenre } from '../api/genres';
+import { useSelector } from 'react-redux';
+import { RootState } from '../modules'
 import '../css/MainVisual.css';
 
 function MainVisualContainer() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getTrendListThunk('movie', 'week'));
-  });
-  let genres = getGenre('movie');
+  const { data, loading, error } = useSelector((state: RootState) => state.trend.trendList);
 
-  return <MainVisual genres={genres} />;
+  if (loading) return <p className="message">로딩중</p>;
+  if (error) return <p className="message">에러발생</p>;
+  if (data) return <MainVisual data={data.results} />;
+  return null;
 }
 
 export default MainVisualContainer;
