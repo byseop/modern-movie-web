@@ -1,5 +1,14 @@
 @charset "utf-8";
 
+.message {
+  height: 500px;
+  color: #fff;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
 .main_visual {
   overflow: hidden;
   padding-bottom: 50px;

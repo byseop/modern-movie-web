@@ -9,7 +9,9 @@ function ListContainer() {
       <div className="list_nav">
         <ListHeaderContainer />
       </div>
-      <List />
+      <div className="list_wrap">
+        <List />
+      </div>
     </div>
   );
 }

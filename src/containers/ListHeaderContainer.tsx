@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../components/Header';
-import { useDispatch } from 'react-redux'
-import { getMovieListThunk } from '../modules/tmdb'
+import { useDispatch } from 'react-redux';
+import { getMovieListThunk } from '../modules/tmdb';
 
 export type MenuList = {
   id: string;
@@ -26,11 +26,6 @@ const menuList: MenuList[] = [
     isOn: false
   },
   {
-    id: 'latest',
-    label: '개봉순',
-    isOn: false
-  },
-  {
     id: 'upcoming',
     label: '개봉예정',
     isOn: false
@@ -40,10 +35,16 @@ const menuList: MenuList[] = [
 function ListHeaderContainer() {
   const dispatch = useDispatch();
   const loadMovieList = (param: string) => {
-    dispatch(getMovieListThunk(param))
-  }
-  const initialParam = 'now_playing'
-  return <Header menuList={menuList} load={loadMovieList} initialParam={initialParam} />;
+    dispatch(getMovieListThunk(param));
+  };
+  const initialParam = 'now_playing';
+  return (
+    <Header
+      menuList={menuList}
+      load={loadMovieList}
+      initialParam={initialParam}
+    />
+  );
 }
 
 export default ListHeaderContainer;
