@@ -64,3 +64,39 @@
 .movie .movie_score .vote_average {
   margin: 0 5px;
 }
+
+.list_nav {
+  display: flex;
+  justify-content: space-between;
+}
+.list_nav .search_form {
+  position: relative;
+}
+.list_nav .search_form input {
+  display: block;
+  width: 150px;
+  height: 32px;
+  font-size: 1rem;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.2);
+  border: none;
+  padding: 0 10px;
+  transition: all 0.3s ease-out;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.list_nav .search_form input:focus {
+  width: 300px;
+  background: rgba(0, 0, 0, 0.5);
+}
+.list_nav .search_form button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}

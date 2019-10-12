@@ -10,18 +10,21 @@ function List() {
   if (loading) return <div className="message">로딩중</div>;
   if (error) return <div className="message">에러발생</div>;
   if (data) {
-    return (
-      <>
-        {data.results.map((movie: Movie) => (
-          <MovieList key={movie.id} movie={movie} />
-        ))}
-      </>
-    );
+    console.log(data.results.length);
+    if (data.results.length > 0) {
+      return (
+        <>
+          {data.results.map((movie: Movie) => (
+            <MovieList key={movie.id} movie={movie} />
+          ))}
+        </>
+      );
+    } else return <div className="message">검색 결과가 없습니다.</div>;
   }
   return null;
 }
 
-function MovieList({ movie }: { movie: Movie }) {
+const MovieList = React.memo(({ movie }: { movie: Movie }) => {
   const {
     poster_path,
     title,
@@ -49,6 +52,6 @@ function MovieList({ movie }: { movie: Movie }) {
       </div>
     </div>
   );
-}
+});
 
 export default List;
