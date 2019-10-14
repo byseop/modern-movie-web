@@ -10,7 +10,6 @@ function List() {
   if (loading) return <div className="message">로딩중</div>;
   if (error) return <div className="message">에러발생</div>;
   if (data) {
-    console.log(data.results.length);
     if (data.results.length > 0) {
       return (
         <>

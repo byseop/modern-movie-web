@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux';
 import tmdb from './tmdb';
 import trend from './trend';
-import video from './video'
+import video from './video';
+import detail from './detail';
 
 const rootReducer = combineReducers({
   tmdb,
   trend,
-  video
+  video,
+  detail
 });
 
 export default rootReducer;

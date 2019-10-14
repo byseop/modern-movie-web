@@ -7,6 +7,7 @@ import {
 } from '../api/tmdb';
 import { getGenre } from '../api/genres';
 import Swiper from 'swiper';
+import { Link } from 'react-router-dom';
 
 /**
  *  메인비주얼 컴포넌트
@@ -23,7 +24,7 @@ const setBackground = () => {
           .getAttribute('data-backdrop')});`
       );
   }, 10);
-}
+};
 
 function MainVisual({ data }: { data: Media[] }) {
   useEffect(() => {
@@ -142,7 +143,9 @@ const MainVisualList = React.memo(
         data-backdrop={backdrop_path}
       >
         <div className="media_poster">
-          <img src={`${POSTER_URL_500}/${poster_path}`} alt={title} />
+          <Link to={`/detail/${id}`}>
+            <img src={`${POSTER_URL_500}/${poster_path}`} alt={title} />
+          </Link>
         </div>
         <div className="media_info">
           <div className="media_title">
@@ -151,7 +154,7 @@ const MainVisualList = React.memo(
           </div>
           <div className="media_score">
             <i className="fas fa-star"></i>
-            <span className="vote_average">{vote_average*10}%</span>
+            <span className="vote_average">{vote_average * 10}%</span>
             <span className="vote_count">({vote_count})</span>
           </div>
           <div className="media_genre">
