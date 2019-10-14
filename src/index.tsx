@@ -8,10 +8,11 @@ import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import Thunk from 'redux-thunk';
 import rootReducer from './modules';
+import logger from 'redux-logger';
 
 const store = createStore(
   rootReducer,
-  composeWithDevTools(applyMiddleware(Thunk))
+  composeWithDevTools(applyMiddleware(Thunk, logger))
 );
 
 ReactDOM.render(
