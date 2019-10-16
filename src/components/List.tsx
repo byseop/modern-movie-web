@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../modules';
 import { Movie, POSTER_URL_342 } from '../api/tmdb';
+import { Link } from 'react-router-dom';
 
 function List() {
   const { data, loading, error } = useSelector(
@@ -29,14 +30,17 @@ const MovieList = React.memo(({ movie }: { movie: Movie }) => {
     title,
     original_title,
     vote_average,
-    vote_count
+    vote_count,
+    id
   } = movie;
   return (
     <div className="movie">
       <div className="movie_poster">
-        <picture>
-          <img src={`${POSTER_URL_342}${poster_path}`} alt={title} />
-        </picture>
+        <Link to={`/detail/${id}`}>
+          <picture>
+            <img src={`${POSTER_URL_342}${poster_path}`} alt={title} />
+          </picture>
+        </Link>
       </div>
       <div className="movie_info">
         <div className="movie_title">

@@ -23,7 +23,7 @@ const setBackground = () => {
           .querySelectorAll('.swiper-slide-active')[0]
           .getAttribute('data-backdrop')});`
       );
-  }, 10);
+  }, 100);
 };
 
 function MainVisual({ data }: { data: Media[] }) {

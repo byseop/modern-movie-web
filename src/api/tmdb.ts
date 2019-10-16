@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const API_KEY = 'dc11dbd0605b4d60cc66ce5e8363e063';
-const TMDB_URL = 'https://api.themoviedb.org/3';
+export const API_KEY = 'dc11dbd0605b4d60cc66ce5e8363e063';
+export const TMDB_URL = 'https://api.themoviedb.org/3';
 export const POSTER_URL_342 = 'https://image.tmdb.org/t/p/w342';
 export const POSTER_URL_500 = 'https://image.tmdb.org/t/p/w500';
 export const POSTER_URL_780 = 'https://image.tmdb.org/t/p/w780';
@@ -128,3 +128,34 @@ export async function getDetail(id: string) {
   );
   return response.data;
 }
+
+export interface Cast {
+  cast_id: number;
+  character: string;
+  credit_id: string;
+  gender: number;
+  name: string;
+  order: number;
+  profile_path: string;
+  id: number;
+}
+export interface Crew {
+  credit_id: string;
+  department: string;
+  gender: number;
+  id: number;
+  job: string;
+  name: string;
+  profile_path: string | null;
+}
+export interface Credit {
+  id: number;
+  cast: Cast[];
+  crew: Crew[];
+}
+export const getCredit = async (id: string | number) => {
+  const response = await axios.get<Credit>(
+    `${TMDB_URL}/movie/${id}/credits?api_key=${API_KEY}&language=ko-KR`
+  );
+  return response.data;
+};

@@ -44,6 +44,12 @@
 .main_visual_slider {
   overflow: visible;
 }
+.main_visual_slider .swiper-slide .media_poster {
+  pointer-events: none;
+}
+.main_visual_slider .swiper-slide-active .media_poster {
+  pointer-events: all;
+}
 .media_list {
   display: flex;
   height: 600px;
