@@ -62,6 +62,8 @@
 .detail_info {
     display: flex;
     margin-top: 50px;
+    padding-bottom: 50px;
+    border-bottom: 1px solid rgba(255, 255, 255, .2);
 }
 .detail_info .detail_poster {
     width: 342px;
@@ -208,7 +210,7 @@
     flex: 1;
 }
 .detail_info_mid .btn_more {
-    text-align: center;
+    text-align: right;
     margin-top: 10px;
 }
 .detail_info_mid .btn_more button {
@@ -278,4 +280,32 @@
     font-size: 10px;
     letter-spacing: 0;
     color: #d8d8d8;
+}
+
+.detail_info .detail_poster .media_trailer a {
+    display: block;
+    padding: 0.5rem 0;
+    text-align: center;
+    border: 1px solid #d8d8d8;
+    opacity: 0.7;
+    border-radius: 10px;
+    transition: all 0.3s ease-out;
+}
+.detail_info .detail_poster .media_trailer a:hover {
+    opacity: 1;
+}
+
+.gallery_sl {
+    margin-top: 20px;
+}
+.gallery_wrap {
+    margin-top: 2.5rem;
+}
+.gallery_sl .swiper-slide {
+    width: auto;
+}
+.gallery_title h4 {
+    color: #d8d8d8;
+    font-size: 30px;
+    margin: 0;
 }

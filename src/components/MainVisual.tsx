@@ -47,9 +47,9 @@ function MainVisual({ data }: { data: Media[] }) {
         slideChange: () => {
           setBackground();
         }
-      }
+      },
     });
-  });
+  }, []);
 
   const renderGenre = useCallback(
     (genreId: number) => {
@@ -143,9 +143,13 @@ const MainVisualList = React.memo(
         data-backdrop={backdrop_path}
       >
         <div className="media_poster">
-          <Link to={`/detail/${id}`}>
+          {media_type === 'movie' ? (
+            <Link to={`/detail/${id}`}>
+              <img src={`${POSTER_URL_500}/${poster_path}`} alt={title} />
+            </Link>
+          ) : (
             <img src={`${POSTER_URL_500}/${poster_path}`} alt={title} />
-          </Link>
+          )}
         </div>
         <div className="media_info">
           <div className="media_title">
@@ -170,7 +174,7 @@ const MainVisualList = React.memo(
   }
 );
 
-function Video({ mediaType, id }: { mediaType: string; id: number }) {
+export function Video({ mediaType, id }: { mediaType: string; id: number }) {
   const [link, setLink] = useState('');
   const renderVideo = useCallback(async () => {
     const data = await getVideo(mediaType, id);

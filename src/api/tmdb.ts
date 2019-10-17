@@ -159,3 +159,26 @@ export const getCredit = async (id: string | number) => {
   );
   return response.data;
 };
+
+export const getImage = async (id: string | number) => {
+  const response = await axios.get<Images>(
+    `${TMDB_URL}/movie/${id}/images?api_key=${API_KEY}`
+  );
+  return response.data;
+};
+
+export interface Images {
+  id:        number;
+  backdrops: Backdrop[];
+  posters:   Backdrop[];
+}
+
+export interface Backdrop {
+  aspect_ratio: number;
+  file_path:    string;
+  height:       number;
+  iso_639_1:    null | string;
+  vote_average: number;
+  vote_count:   number;
+  width:        number;
+}

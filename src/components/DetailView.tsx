@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Swiper from 'swiper';
 import {
   Detail,
   POSTER_URL_ORIGINAL,
@@ -6,8 +7,12 @@ import {
   Cast,
   Crew,
   Credit,
-  getCredit
+  getCredit,
+  getImage,
+  Images,
+  Backdrop
 } from '../api/tmdb';
+import { Video } from './MainVisual';
 
 function DetailView({ data }: { data: Detail; getCredit: any }) {
   const {
@@ -53,6 +58,7 @@ function DetailView({ data }: { data: Detail; getCredit: any }) {
                 <img src={`${POSTER_URL_342}${poster_path}`} alt={title} />
               </picture>
             </div>
+            <Video mediaType={'movie'} id={id} />
           </div>
           <div className="detail_list_wrap">
             <div className="detail_info_top">
@@ -63,12 +69,17 @@ function DetailView({ data }: { data: Detail; getCredit: any }) {
                   <span>{vote_average * 10}%</span> <span>({vote_count})</span>
                 </p>
                 <p>
-                  <i className="fas fa-calendar-day"></i> <span>{release_date}</span>
+                  <i className="fas fa-calendar-day"></i>{' '}
+                  <span>{release_date}</span>
                 </p>
                 <p>
                   <i className="fas fa-clock"></i> <span>{runtime}분</span>
                 </p>
-                {spoken_languages.map(l => <p key={l.name}><i className="fas fa-language"></i> <span>{l.name}</span></p>)}
+                {spoken_languages.map(l => (
+                  <p key={l.name}>
+                    <i className="fas fa-language"></i> <span>{l.name}</span>
+                  </p>
+                ))}
               </div>
               <div className="right">
                 <p>
@@ -98,6 +109,9 @@ function DetailView({ data }: { data: Detail; getCredit: any }) {
               </div>
             </div>
           </div>
+        </div>
+        <div className="gallery_wrap">
+          <Gallery id={id} name={title} />
         </div>
       </div>
     </div>
@@ -168,6 +182,38 @@ function Credits({ id }: { id: number }) {
         </button>
       </div>
     </>
+  );
+}
+
+function Gallery({ id, name }: { id: number; name: string }) {
+  const [images, setImage] = useState();
+  useEffect(() => {
+    new Swiper('.gallery_sl', {
+      observer: true,
+      observeParents: true,
+      spaceBetween: 50,
+      slidesPerView: 'auto',
+      freeMode: true,
+      autoHeight: true
+    });
+  }, []);
+  useEffect(() => {
+    getImage(id).then((value: Images) => setImage(value));
+  }, [id]);
+
+  return (
+    <div className="gallery">
+      <div className="gallery_title"><h4>갤러리</h4></div>
+      <div className="gallery_sl swiper-container">
+        <div className="swiper-wrapper">
+          {images && images.backdrops.map((i: Backdrop) => (
+            <div className="swiper-slide" key={i.file_path}>
+              <img src={`${POSTER_URL_342}${i.file_path}`} alt={name} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
 
