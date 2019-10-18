@@ -9,7 +9,6 @@ import {
   Credit,
   getCredit,
   getImage,
-  Images,
   Backdrop
 } from '../api/tmdb';
 import { Video } from './MainVisual';
@@ -188,18 +187,31 @@ function Credits({ id }: { id: number }) {
 function Gallery({ id, name }: { id: number; name: string }) {
   const [images, setImage] = useState();
   useEffect(() => {
-    new Swiper('.gallery_sl', {
+    (async () => {
+      const data = await getImage(id);
+      try {
+        setImage(data)
+      } catch(e) {
+        console.error(e);
+      }
+    })();
+  }, [id]);
+  useEffect(() => {
+    const gallery = new Swiper('.gallery_sl', {
       observer: true,
       observeParents: true,
       spaceBetween: 50,
       slidesPerView: 'auto',
       freeMode: true,
-      autoHeight: true
+      lazy: true,
+      watchSlidesVisibility: true,
+      on: {
+        slideChange: () => {
+          gallery.update()
+        },
+      }
     });
   }, []);
-  useEffect(() => {
-    getImage(id).then((value: Images) => setImage(value));
-  }, [id]);
 
   return (
     <div className="gallery">
@@ -208,7 +220,8 @@ function Gallery({ id, name }: { id: number; name: string }) {
         <div className="swiper-wrapper">
           {images && images.backdrops.map((i: Backdrop) => (
             <div className="swiper-slide" key={i.file_path}>
-              <img src={`${POSTER_URL_342}${i.file_path}`} alt={name} />
+              <img src={`${POSTER_URL_342}${i.file_path}`} alt={name} className="swiper-lazy" />
+              <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
             </div>
           ))}
         </div>
