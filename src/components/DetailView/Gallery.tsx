@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Swiper from 'swiper';
-import { POSTER_URL_342, getImage, Backdrop } from '../../api/tmdb';
+import { POSTER_URL_342, POSTER_URL_ORIGINAL, getImage, Backdrop } from '../../api/tmdb';
+import mediumZoom, { Zoom } from 'medium-zoom';
 
 function Gallery({ id, name }: { id: number; name: string }) {
   const [images, setImage] = useState();
@@ -21,8 +22,6 @@ function Gallery({ id, name }: { id: number; name: string }) {
       spaceBetween: 50,
       slidesPerView: 'auto',
       freeMode: true,
-      lazy: true,
-      watchSlidesVisibility: true,
       on: {
         slideChange: () => {
           gallery.update();
@@ -30,6 +29,8 @@ function Gallery({ id, name }: { id: number; name: string }) {
       }
     });
   }, []);
+
+  const zoom = mediumZoom({ background: 'rgba(0, 0, 0, .5)', margin: 40 });
 
   return (
     <div className="gallery">
@@ -41,18 +42,25 @@ function Gallery({ id, name }: { id: number; name: string }) {
           {images &&
             images.backdrops.map((i: Backdrop) => (
               <div className="swiper-slide" key={i.file_path}>
-                <img
+                <Image
                   src={`${POSTER_URL_342}${i.file_path}`}
+                  original={`${POSTER_URL_ORIGINAL}${i.file_path}`}
                   alt={name}
-                  className="swiper-lazy"
+                  zoom={zoom}
                 />
-                <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
               </div>
             ))}
         </div>
       </div>
     </div>
   );
+}
+
+function Image({ src, alt, zoom, original }: { src: string; alt: string; zoom: Zoom; original: string }) {
+  const attachZoom = (image: any) => {
+    zoom.attach(image)
+  }
+  return <img src={src} alt={alt} ref={attachZoom} data-zoom-src={original} />
 }
 
 export default Gallery;

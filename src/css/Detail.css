@@ -309,3 +309,10 @@
     font-size: 30px;
     margin: 0;
 }
+
+.medium-zoom--opened .medium-zoom-overlay {
+    z-index: 10;
+}
+.medium-zoom-image--opened {
+    z-index: 100;
+}
