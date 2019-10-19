@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/modern-movie-web/static/css/main.fb664243.chunk.css",
-    "main.js": "/modern-movie-web/static/js/main.540366b7.chunk.js",
-    "main.js.map": "/modern-movie-web/static/js/main.540366b7.chunk.js.map",
+    "main.css": "/modern-movie-web/static/css/main.f0332da5.chunk.css",
+    "main.js": "/modern-movie-web/static/js/main.520c6cae.chunk.js",
+    "main.js.map": "/modern-movie-web/static/js/main.520c6cae.chunk.js.map",
     "runtime-main.js": "/modern-movie-web/static/js/runtime-main.c1a18d46.js",
     "runtime-main.js.map": "/modern-movie-web/static/js/runtime-main.c1a18d46.js.map",
     "static/js/2.cf4c793d.chunk.js": "/modern-movie-web/static/js/2.cf4c793d.chunk.js",
     "static/js/2.cf4c793d.chunk.js.map": "/modern-movie-web/static/js/2.cf4c793d.chunk.js.map",
     "index.html": "/modern-movie-web/index.html",
-    "precache-manifest.d63c058f3035280ba8dfbfb853d565c8.js": "/modern-movie-web/precache-manifest.d63c058f3035280ba8dfbfb853d565c8.js",
+    "precache-manifest.66b6c82ce5d7e966d419098560df12c4.js": "/modern-movie-web/precache-manifest.66b6c82ce5d7e966d419098560df12c4.js",
     "service-worker.js": "/modern-movie-web/service-worker.js",
-    "static/css/main.fb664243.chunk.css.map": "/modern-movie-web/static/css/main.fb664243.chunk.css.map"
+    "static/css/main.f0332da5.chunk.css.map": "/modern-movie-web/static/css/main.f0332da5.chunk.css.map"
   },
   "entrypoints": [
     "static/js/runtime-main.c1a18d46.js",
     "static/js/2.cf4c793d.chunk.js",
-    "static/css/main.fb664243.chunk.css",
-    "static/js/main.540366b7.chunk.js"
+    "static/css/main.f0332da5.chunk.css",
+    "static/js/main.520c6cae.chunk.js"
   ]
 }
