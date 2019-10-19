@@ -20,3 +20,14 @@
 .App-link {
   color: #09d3ac;
 }
+
+footer {
+  padding: 50px 200px;
+  margin-top: 5rem;
+  color: #09d3ac;
+  font-size: 12px;
+  letter-spacing: 0;
+}
+footer p {
+  margin: 0;
+}
