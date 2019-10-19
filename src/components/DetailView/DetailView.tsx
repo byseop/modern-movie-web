@@ -1,12 +1,9 @@
 import React from 'react';
-import {
-  Detail,
-  POSTER_URL_ORIGINAL,
-  POSTER_URL_342,
-} from '../../api/tmdb';
+import { Detail, POSTER_URL_ORIGINAL, POSTER_URL_342 } from '../../api/tmdb';
 import { Video } from '../MainVisual';
 import Gallery from './Gallery';
-import Credits from './Credits'
+import Credits from './Credits';
+import Clips from './Clips';
 
 function DetailView({ data }: { data: Detail; getCredit: any }) {
   const {
@@ -106,6 +103,9 @@ function DetailView({ data }: { data: Detail; getCredit: any }) {
         </div>
         <div className="gallery_wrap">
           <Gallery id={id} name={title} />
+        </div>
+        <div className="clips_wrap">
+          <Clips id={id} mediaType={'movie'} />
         </div>
       </div>
     </div>
