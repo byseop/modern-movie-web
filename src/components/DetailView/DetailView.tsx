@@ -4,6 +4,7 @@ import { Video } from '../MainVisual';
 import Gallery from './Gallery';
 import Credits from './Credits';
 import Clips from './Clips';
+import List from './List';
 
 function DetailView({ data }: { data: Detail; getCredit: any }) {
   const {
@@ -106,6 +107,14 @@ function DetailView({ data }: { data: Detail; getCredit: any }) {
         </div>
         <div className="clips_wrap">
           <Clips id={id} mediaType={'movie'} />
+        </div>
+        <div className="similar">
+          <div className="similar_title">
+            <h4>비슷한 영화</h4>
+          </div>
+          <div className="similar_wrap">
+            <List id={id} />
+          </div>
         </div>
       </div>
     </div>

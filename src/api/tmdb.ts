@@ -168,17 +168,24 @@ export const getImage = async (id: string | number) => {
 };
 
 export interface Images {
-  id:        number;
+  id: number;
   backdrops: Backdrop[];
-  posters:   Backdrop[];
+  posters: Backdrop[];
 }
 
 export interface Backdrop {
   aspect_ratio: number;
-  file_path:    string;
-  height:       number;
-  iso_639_1:    null | string;
+  file_path: string;
+  height: number;
+  iso_639_1: null | string;
   vote_average: number;
-  vote_count:   number;
-  width:        number;
+  vote_count: number;
+  width: number;
 }
+
+export const getSimilar = async (id: string | number) => {
+  const response = await axios.get<MovieList>(
+    `${TMDB_URL}/movie/${id}/similar?api_key=${API_KEY}&language=ko-KR`
+  );
+  return response.data;
+};

@@ -356,3 +356,32 @@
 .clips .message {
   height: 200px;
 }
+.clips {
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.similar {
+  max-width: 1000px;
+  margin: 60px auto 0;
+}
+.similar_title h4 {
+  color: #d8d8d8;
+  font-size: 30px;
+  margin: 0;
+}
+.similar_wrap {
+  display: flex;
+  flex-flow: row wrap;
+  margin: 0 -1rem -3rem;
+}
+.similar .btn_more button {
+  background: none;
+  padding: 0;
+  border: none;
+  color: #d8d8d8;
+  font-size: 20px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+}
