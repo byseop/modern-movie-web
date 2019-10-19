@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/modern-movie-web/precache-manifest.11be82fbd23f4691dc7f2c7a0a04bf27.js"
+  "/modern-movie-web/precache-manifest.d63c058f3035280ba8dfbfb853d565c8.js"
 );
 
 self.addEventListener('message', (event) => {
