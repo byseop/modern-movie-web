@@ -1,7 +1,7 @@
-#Mordern Movie Web  
-[https://byseop.github.io/modern-movie-web](https://byseop.github.io/modern-movie-web)
+# Mordern Movie Web  
+[완성 페이지](https://byseop.github.io/modern-movie-web)
 
-###dir
+### dir
 
 ```
 src
@@ -76,7 +76,7 @@ src
 **lib**: 공용으로 사용하는 라이브러리 혹은 함수 모음  
 **modules**: 리듀서를 모듈화 한 파일의 모음
 
-###package
+### package
 
 ```
 "@types/react": "16.9.5",
@@ -107,7 +107,7 @@ src
 **redux-logger**: 리덕스 로깅 미들웨어  
 **redux-thunk**: 비동기 처리를 위한 리덕스 미들웨어  
 **typescript**  
-**typesafe-actions**: 리덕스액션 관련 라이브러리
+**typesafe-actions**: 리덕스액션 관련 라이브러리  
 **swiper**: 슬라이더
 **axios**: API통신 라이브러리  
 **medium-zoom**: 이미지 라이브러리
