@@ -9,7 +9,7 @@ export const POSTER_URL_ORIGINAL = 'https://image.tmdb.org/t/p/original';
 
 export async function getMovie(param: string, search?: boolean) {
   const response = await axios.get<MovieList>(
-    `${TMDB_URL}${search ? '/search' : ''}/movie/${
+    `${TMDB_URL}${search ? '/search/movie' : '/movie/'}${
       search ? '?query=' : ''
     }${param}${search ? '&' : '?'}api_key=${API_KEY}&language=ko-KR&page=1`
   );
