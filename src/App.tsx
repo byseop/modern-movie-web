@@ -3,6 +3,7 @@ import MovieWeb from './containers/MovieWeb';
 import './App.css';
 import { Route } from 'react-router-dom';
 import Detail from './containers/DetailContainer';
+import 'swiper/swiper-bundle.css';
 
 const App = () => {
   return (
